@@ -5,4 +5,13 @@ package yadisk.nitribubbles.com.yadisk.data.repository;
  */
 
 public class TestRepository implements Repository  {
+    @Override
+    public void saveToken(String token) {
+
+    }
+
+    @Override
+    public String getToken() {
+        return "testToken";
+    }
 }

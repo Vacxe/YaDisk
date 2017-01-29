@@ -5,4 +5,6 @@ package yadisk.nitribubbles.com.yadisk.data.repository;
  */
 
 public interface Repository {
+    void saveToken(String token);
+    String getToken();
 }

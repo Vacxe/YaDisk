@@ -11,7 +11,7 @@ import yadisk.nitribubbles.com.yadisk.data.repository.Repository;
  */
 
 public class BaseAppication extends Application {
-    private Component appComponent;
+    public Component appComponent;
 
     @Override
     public void onCreate() {
@@ -26,7 +26,7 @@ public class BaseAppication extends Application {
 
     @Singleton
     @dagger.Component(modules = {MainModule.class})
-    interface Component{
+    public interface Component{
         Repository repository();
     }
 }

@@ -13,4 +13,14 @@ public class ProductionRepository implements Repository {
     public ProductionRepository(LocalStorage localStorage) {
         this.localStorage = localStorage;
     }
+
+    @Override
+    public void saveToken(String token) {
+        localStorage.saveToken(token);
+    }
+
+    @Override
+    public String getToken() {
+        return localStorage.getToken();
+    }
 }

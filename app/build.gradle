@@ -40,5 +40,5 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.2'
     compile 'com.google.dagger:dagger:2.2'
 
-
+    compile 'com.yandex.android:disk-restapi-sdk:1.0'
 }
