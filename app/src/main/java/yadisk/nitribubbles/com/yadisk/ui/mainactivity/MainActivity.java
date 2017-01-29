@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         inject();
+        setContentView(R.layout.activity_main);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.hide();
+        }
         presenter.bindView(this);
 
         if (getIntent() != null && getIntent().getData() != null) {
@@ -63,7 +70,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void showBrowserFragment() {
-
+        Log.e("Tag", "MainActivity -> showBrowserFragment()");
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.show();
+        }
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_container, new BrowserFragment())
+                .commit();
     }
 
     public static class AuthDialogFragment extends DialogFragment {

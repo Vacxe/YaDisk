@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YaDisk</string>
+    <string name="load_error">В ходе загрузки произошла ошибка</string>
+    <string name="path">Путь к файлу: </string>
 </resources>

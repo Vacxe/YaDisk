@@ -9,6 +9,9 @@ public class Constants {
     public static final String AUTH_URL = "https://oauth.yandex.ru/authorize?response_type=token&client_id="+CLIENT_ID;
     public static final String USERNAME = "pref.username";
     public static final String TOKEN = "pref.token";
+    public static final String STORED_DIR = "pref.storedDir";
 
+    public static final String HOST = "https://cloud-api.yandex.net/";
 
+    public static final String ROOT = "/";
 }

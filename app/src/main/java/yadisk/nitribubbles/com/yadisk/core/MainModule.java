@@ -5,6 +5,7 @@ import android.app.Application;
 import javax.inject.Singleton;
 
 import dagger.Provides;
+import yadisk.nitribubbles.com.yadisk.data.api.API;
 import yadisk.nitribubbles.com.yadisk.data.repository.ProductionRepository;
 import yadisk.nitribubbles.com.yadisk.data.repository.Repository;
 import yadisk.nitribubbles.com.yadisk.data.store.LocalStorage;
@@ -23,8 +24,14 @@ public class MainModule {
 
     @Singleton
     @Provides
-    public Repository provideRepository(LocalStorage localStorage){
-        return new ProductionRepository(localStorage);
+    public Repository provideRepository(LocalStorage localStorage, API api){
+        return new ProductionRepository(localStorage, api);
+    }
+
+    @Singleton
+    @Provides
+    public API provideApi(LocalStorage localStorage){
+        return new API(localStorage);
     }
 
     @Singleton

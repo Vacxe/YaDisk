@@ -1,20 +1,16 @@
 package yadisk.nitribubbles.com.yadisk.ui.mainactivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import yadisk.nitribubbles.com.yadisk.data.repository.Repository;
-import yadisk.nitribubbles.com.yadisk.data.store.LocalStorage;
 import yadisk.nitribubbles.com.yadisk.ui.BasePresenter;
 
-import static yadisk.nitribubbles.com.yadisk.core.Constants.TOKEN;
 
 /**
  * Created by konstantinaksenov on 29.01.17.
@@ -55,8 +51,6 @@ public class MainActivityPresenter extends BasePresenter<MainActivityContract.Vi
             return;
         }
 
-        if (bundle == null) {
-            getView().showBrowserFragment();
-        }
+        getView().showBrowserFragment();
     }
 }
