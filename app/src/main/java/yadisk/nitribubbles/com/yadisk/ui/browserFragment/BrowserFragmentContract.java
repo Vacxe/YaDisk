@@ -14,6 +14,8 @@ import yadisk.nitribubbles.com.yadisk.ui.object.Resource;
 public class BrowserFragmentContract {
     interface Presenter{
         void loadDirectory(String dir);
+        void loadPreviousDirectory();
+        void openFile(Resource resource);
 
     }
 

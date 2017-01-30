@@ -3,7 +3,9 @@ package yadisk.nitribubbles.com.yadisk.ui.browserFragment;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 import rx.Observable;
@@ -30,6 +32,7 @@ public class BrowserFragmentPresenter extends BasePresenter<BrowserFragmentContr
 
     DirectoryMapper directoryMapper = new DirectoryMapper();
     ResourcesMapper resourcesMapper = new ResourcesMapper();
+    Deque<String> folderStack = new ArrayDeque<>();
 
     public BrowserFragmentPresenter(Repository repository) {
         this.repository = repository;
@@ -37,7 +40,7 @@ public class BrowserFragmentPresenter extends BasePresenter<BrowserFragmentContr
 
     @Override
     public void loadDirectory(String dir) {
-
+        folderStack.add(dir);
         BrowserFragmentContract.View view = getView();
         if(view != null){
             view.showLoader();
@@ -88,5 +91,16 @@ public class BrowserFragmentPresenter extends BasePresenter<BrowserFragmentContr
                         }
                     }
                 });
+    }
+
+    @Override
+    public void loadPreviousDirectory() {
+        loadDirectory(folderStack.poll());
+        folderStack.removeFirst();
+    }
+
+    @Override
+    public void openFile(Resource resource) {
+        //TODO: Download and open file
     }
 }

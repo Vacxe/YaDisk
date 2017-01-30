@@ -33,7 +33,7 @@ import static yadisk.nitribubbles.com.yadisk.core.Constants.ROOT;
  * Created by konstantinaksenov on 29.01.17.
  */
 
-public class BrowserFragment extends Fragment implements BrowserFragmentContract.View{
+public class BrowserFragment extends Fragment implements BrowserFragmentContract.View, ResourcesListAdapter.OnItemClickListener{
 
     @Inject BrowserFragmentPresenter presenter;
 
@@ -49,9 +49,16 @@ public class BrowserFragment extends Fragment implements BrowserFragmentContract
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e("Tag", "BrowserFragment -> onViewCreated()");
         inject();
         presenter.bindView(this);
+
+        binding.backstackView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loadPreviousDirectory();
+            }
+        });
+
         presenter.loadDirectory(ROOT);
     }
 
@@ -71,10 +78,10 @@ public class BrowserFragment extends Fragment implements BrowserFragmentContract
 
     @Override
     public void showList(List<Resource> resources) {
-        Log.e("Tag", "ShowList with " + String.valueOf(resources.size()));
-        ResourcesListAdapter adapter = new ResourcesListAdapter(resources);
+        ResourcesListAdapter adapter = new ResourcesListAdapter(resources, this);
         binding.resourcesList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.resourcesList.setAdapter(adapter);
+        //TODO: reuse adapter
     }
 
     @Override
@@ -107,6 +114,18 @@ public class BrowserFragment extends Fragment implements BrowserFragmentContract
     @Override
     public void hideLoader() {
 
+    }
+
+    @Override
+    public void onClick(Resource resource) {
+        switch (resource.getType()){
+            case DIR:
+                presenter.loadDirectory(resource.getPath());
+                break;
+            case FILE:
+                presenter.openFile(resource);
+                break;
+        }
     }
 
     @Scopes.PerFragment
